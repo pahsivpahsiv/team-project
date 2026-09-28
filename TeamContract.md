@@ -1,54 +1,51 @@
 # Team Contract
 
-**Your team is free to revise this contract as your team wishes; we have scaffolded it with a recommended structure similar to the provided sample on Quercus.**
-
-After you reflect on past teamwork experiences and brainstorm a list of actions required for a positive teamwork experience, answer these questions. 
-
-Once you have all agreed on the contents of the team contract, make a PR to merge your team contract into the main branch of your team's repo on GitHub.
-
-**Please remember to remove any of the initial instruction text when your team finalizes your team contract; it should resemble the provided sample once complete, but with details specific to the expectations and norms agreed to by your entire team.**
-
 ---
 ## Purpose of this Contract
 
-This contract sets out shared expectations and commitments for how our team will collaborate during the course. It is designed to promote accountability, professionalism, and mutual support as we complete individual preparation, readiness assurance tests, in-class activities, and our course project.
+This contract sets out shared expectations and commitments
+for how our team will collaborate during the course. It is
+designed to promote accountability, professionalism, and
+mutual support as we complete individual preparation,
+readiness assurance tests, in-class activities, and our
+course project.
 
 ---
 ## Team Norms and Expectations
 
 ### Communication
 
-* Which platform will you use for communication outside of class, when required for work on your course project? (Examples: Text message, Discord, WeChat, etc.)
+* We will use Discord for communication outside of class, when required for work on our course project.
 
-* Each teammate agrees to respond to messages in at most how long? 1 day? 2 days? Some other amount of time? 
+* Each teammate agrees to respond to (direct) notifications in at most 1 day. Urgent communication may be litigated on a case-by-case basis.
 
-* What things should a teammate notify you about? (Examples: if they think they won't be able to meet a deadline, if they have to miss lecture, etc.)
+* Notify team members if you have to miss a lecture/tutorial, or need to work on another team member's files.
 
-* Respectful and inclusive behaviour are necessary for smooth and productive communication. What are some respectful and inclusive behaviours you expect when communicating with each other during lectures, labs, or outside of class? (Examples: Actively listening to each team members ideas, giving everyone a chance to meaningfully contribute, etc.)
+* Team members will work on individual branches and use pull requests when working on main.
 
----
-
-### [Other Categories of norms and expectations go here]
-
-* Based on your previous teamwork experiences, what other behaviours do you agree upon as a team?
-    - some examples of possible additional team norms and expectations are included in the sample team contract in case your team needs some help getting ideas for what else you want to include.
+* Respectful and inclusive behaviour are necessary for smooth and productive communication.
 
 ---
 
 ## Decision Making
 
-* How will decisions about your team project be made? (Examples: By majority vote, by unanimous vote, etc.)
+* Each team member has final say over their own section of the codebase, unless the remaining majority has objections. Refer to conflict resolution otherwise.
+
+* If two team members need to cooperate on a shared section of the codebase, they should organize those changes between themselves. Follow conflict resolution in the event of issues.
 
 ---
+
 ## Conflict resolution
 
-* How will your team resolve conflicts? (Example: by listening to each other's side of the issue and attempting to reach a compromise. By consulting a TA or instructor as a team, if a resolution has not yet been reached.)
+* Compromise if possible, then prefer majority.
+
+* If there is an even split, we will defer to whoever has expertise in a given area (in the event that the conflict is between two different areas of expertise, then we will defer to an unbiased judge).
 
 ---
 
 ## Accountability
 
-* Reliability and accountability are also important aspects of teamwork. What are the responsibilities of each team member? (Example: completing their share of the work in a timely manner, seeking assistance from teammates/TAs/instructors when required, etc.)
+* Each team member is responsible for their section of the codebase ("area of expertise"). Other team members should not modify their codebase without written consent (so it can be referred to later) and other team members' changes should be distinctly notated somehow (usually through code comments and git).
 
 ---
 
@@ -58,4 +55,4 @@ By signing below, we acknowledge that we have read, discussed, and agreed to the
 
 Team Member Signatures:
 
-(type names here)
+Nathan
