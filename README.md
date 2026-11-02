@@ -13,7 +13,32 @@ your team will find it easier to prepare for the final presentation
 at the end of the term.
 
 ## The game of Set and its complications
-Digitise the board game "Set" and its complications.
+Digitise the board game "Set" and its complications (anti-set and ghost set).
+
+## Rules of "Set"
+SET is a fast-paced card game that challenges players to spot patterns, compare features, and think 
+quickly. The goal is to identify groups of three cards, called a Set, in which each feature is 
+either exactly the same on all three cards or completely different on all three.
+
+The Set deck contains 81 cards, and every card has four features (colour, number, shape, and shading) 
+with three possible variations of each.
+
+The goal of the game is to find the most Sets of all players.
+
+If there are no sets on the field, three cards are added to the field.
+
+## Rules of "Anti-Set"
+Anti-set is a complication of the base game that uses the same cards and the same definition of a 
+set, in which player need to find two sets that share the same card. 
+The shared card doesn't have to be on the field, but the other four cards (the anti-set)
+have to be. The player must collect these four cards in pairs (each pair is one of the sets that 
+ends in the shared card).
+
+## Rules of "Ghost Set"
+Ghost set is a further complication of the base game with the same deck and field. The goal is to find 
+three pairs of cards such that the "finishing" cards (a card that would make a given pair a set)
+of the pairs make a set. As any two disjoint (non-intersecting) sets make a ghost set, there is an 
+optional rule banning this kind of ghost set.
 
 ### User Stories
 
