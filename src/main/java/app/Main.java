@@ -10,6 +10,9 @@ public class Main {
     public static void main(String[] args) {
         AppBuilder appBuilder = new AppBuilder();
         JFrame application = appBuilder
+                .setupMainPanel()
+                .addScreenRegions()
+                .addControlFlow()
                 .build();
 
         application.pack();
