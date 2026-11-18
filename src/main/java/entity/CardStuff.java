@@ -17,12 +17,12 @@ public class CardStuff {
     /**
      * A list of all cards in this deck by their id.
      */
-    private ArrayList<Integer> deck;
+    private final ArrayList<Integer> deck;
 
     /**
      * A list of all cards currently on the field by their id.
      */
-    private ArrayList<Integer> field;
+    private final ArrayList<Integer> field;
 
     public CardStuff() {
         int cardCounter = 1;
@@ -105,8 +105,8 @@ public class CardStuff {
                 field.add(deck.remove(0));
             }
         } else {
-            for (int i = 0; i < ids.size(); i++) {
-                field.remove(ids.get(i));
+            for (Integer id : ids) {
+                field.remove(id);
                 field.add(deck.remove(0));
             }
         }
