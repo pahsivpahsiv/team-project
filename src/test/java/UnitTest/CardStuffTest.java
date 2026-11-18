@@ -67,7 +67,7 @@ public class CardStuffTest {
             ids.add(cardStuff.getField().get(0));
             ids.add(cardStuff.getField().get(1));
             ids.add(cardStuff.getField().get(2));
-            ArrayList<Integer> cards = cardStuff.replaceCards(ids);
+            cardStuff.replaceCards(ids);
         }
         ArrayList<Integer> ids = new ArrayList<>();
         ids.add(cardStuff.getField().get(0));
