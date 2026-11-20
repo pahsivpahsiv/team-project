@@ -5,6 +5,9 @@ import entity.CardStuff;
 
 import java.util.ArrayList;
 
+/**
+ * The No Sets Interactor.
+ */
 public class NoSetsInteractor implements NoSetsInputBoundary, SetChecker {
     private final NoSetsOutputBoundary noSetsPresenter;
     private final CardStuff cardStuff;

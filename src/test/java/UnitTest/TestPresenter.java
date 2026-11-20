@@ -2,9 +2,6 @@ package UnitTest;
 import use_case.no_sets.NoSetsOutputBoundary;
 import use_case.no_sets.NoSetsOutputData;
 
-import java.util.ArrayList;
-
-
 public class TestPresenter implements NoSetsOutputBoundary {
     @Override
     public void prepareSuccessView(NoSetsOutputData outputData) {

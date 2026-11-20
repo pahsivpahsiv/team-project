@@ -2,6 +2,9 @@ package use_case.no_sets;
 
 import java.util.ArrayList;
 
+/**
+ * An object for the return data of the No Sets use case.
+ */
 public class NoSetsOutputData {
 
     private final ArrayList<Integer> field;
