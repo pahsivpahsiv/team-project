@@ -30,5 +30,8 @@ public class NoSetsInteractorTest {
         ids.add(2);
         ids.add(4);
         assertFalse(interactor.checkSet(ids));
+        ids.remove(2);
+        ids.add(3);
+        assertTrue(interactor.checkSet(ids));
     }
 }

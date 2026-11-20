@@ -73,7 +73,6 @@ public class NoSetsInteractor implements NoSetsInputBoundary, SetChecker {
                 continue;
             }
             match = false;
-
         }
 
         return match;
