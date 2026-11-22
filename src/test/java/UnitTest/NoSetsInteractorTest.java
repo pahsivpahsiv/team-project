@@ -1,13 +1,10 @@
 package UnitTest;
 
-import entity.Card;
 import entity.CardStuff;
 import org.junit.jupiter.api.Test;
 import use_case.no_sets.NoSetsInteractor;
 import use_case.no_sets.NoSetsOutputBoundary;
 import use_case.no_sets.NormalSetChecker;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class NoSetsInteractorTest {
 
