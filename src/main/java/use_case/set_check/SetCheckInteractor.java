@@ -1,7 +1,6 @@
 package use_case.set_check;
 
 import entity.CardStuff;
-import use_case.no_sets.NoSetsOutputBoundary;
 import use_case.no_sets.SetCheckerStrategy;
 import use_case.no_sets.SetsOutputData;
 
