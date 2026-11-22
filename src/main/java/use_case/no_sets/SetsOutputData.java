@@ -3,7 +3,7 @@ package use_case.no_sets;
 import java.util.ArrayList;
 
 /**
- * An object for the return data of the No Sets use case.
+ * An object for the return data of the set-checking related use cases.
  */
 public class SetsOutputData {
 

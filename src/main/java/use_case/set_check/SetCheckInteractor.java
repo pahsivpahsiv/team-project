@@ -6,6 +6,9 @@ import use_case.no_sets.SetsOutputData;
 
 import java.util.ArrayList;
 
+/**
+ * The Set Check Interactor.
+ */
 public class SetCheckInteractor implements SetCheckInputBoundary{
 
     private final SetCheckOutputBoundary setCheckPresenter;
