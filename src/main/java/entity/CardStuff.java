@@ -89,23 +89,31 @@ public class CardStuff {
         }
 
         if (deck.isEmpty()) {
-            throw new EmptyDeckException("The deck is empty and the cards cannot be replaced.");
-        }
-
-        if (field.size() > 12) {
+            for (int id : ids) {
+                field.remove(id);
+            }
+        } else if (field.size() > 12) {
             while (field.size() > 12) {
                 field.remove(ids.get(0));
                 ids.remove(ids.get(0));
             }
-        }
-
-        if (ids.size() > deck.size()) {
-            for (int i = 0; i < deck.size(); i++) {
-                field.remove(ids.get(i));
-                field.add(deck.remove(0));
+            if (!ids.isEmpty()) {
+                for (int id : ids) {
+                    field.remove(id);
+                    if (!deck.isEmpty()) {
+                        field.add(deck.remove(0));
+                    }
+                }
+            }
+        } else if (ids.size() > deck.size()) {
+            for (int id : ids) {
+                field.remove(id);
+                if (!deck.isEmpty()) {
+                    field.add(deck.remove(0));
+                }
             }
         } else {
-            for (Integer id : ids) {
+            for (int id : ids) {
                 field.remove(id);
                 field.add(deck.remove(0));
             }
