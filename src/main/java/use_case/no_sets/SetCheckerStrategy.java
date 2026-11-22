@@ -5,10 +5,10 @@ import java.util.ArrayList;
 /**
  * Set Checker interface for algorithmic Set-related use cases.
  */
-public interface SetChecker {
+public interface SetCheckerStrategy {
 
     /**
-     * Checks is the input is a set.
+     * Checks whether the input is a set.
      * @param ids the ids of cards to check.
      */
     boolean checkSet(ArrayList<Integer> ids);

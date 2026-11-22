@@ -1,6 +1,5 @@
 package use_case.no_sets;
 
-import entity.Card;
 import entity.CardStuff;
 
 import java.util.ArrayList;
@@ -8,13 +7,15 @@ import java.util.ArrayList;
 /**
  * The No Sets Interactor.
  */
-public class NoSetsInteractor implements NoSetsInputBoundary, SetChecker {
+public class NoSetsInteractor implements NoSetsInputBoundary {
     private final NoSetsOutputBoundary noSetsPresenter;
     private final CardStuff cardStuff;
+    private final SetCheckerStrategy setChecker;
 
-    public NoSetsInteractor (NoSetsOutputBoundary noSetsPresenter, CardStuff cardStuff) {
+    public NoSetsInteractor (NoSetsOutputBoundary noSetsPresenter, CardStuff cardStuff, SetCheckerStrategy setChecker) {
         this.noSetsPresenter = noSetsPresenter;
         this.cardStuff = cardStuff;
+        this.setChecker = setChecker;
     }
 
     @Override
@@ -34,7 +35,7 @@ public class NoSetsInteractor implements NoSetsInputBoundary, SetChecker {
                     ids.add(i);
                     ids.add(j);
                     ids.add(k);
-                    boolean result = this.checkSet(ids);
+                    boolean result = setChecker.checkSet(ids);
 
                     if (!result) {
                         noSetsPresenter.prepareFailView("There is a set on the field.");
@@ -53,28 +54,5 @@ public class NoSetsInteractor implements NoSetsInputBoundary, SetChecker {
 
             noSetsPresenter.prepareSuccessView(outputData);
         }
-    }
-
-    @Override
-    public boolean checkSet(ArrayList<Integer> ids) {
-        ArrayList<Card> cards = cardStuff.getCards(ids);
-        boolean match = true;
-
-        int[] chars1 = cards.get(0).getCharacteristics();
-        int[] chars2 = cards.get(1).getCharacteristics();
-        int[] chars3 = cards.get(2).getCharacteristics();
-        for (int i = 0; i < 4; i++) {
-            if (chars1[i] == chars2[i]
-                    && chars2[i] == chars3[i]) {
-                continue;
-            } else if (chars1[i] != chars2[i]
-                    && chars2[i] != chars3[i]
-                    && chars1[i] != chars3[i]) {
-                continue;
-            }
-            match = false;
-        }
-
-        return match;
     }
 }
