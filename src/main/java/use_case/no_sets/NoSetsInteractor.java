@@ -50,7 +50,7 @@ public class NoSetsInteractor implements NoSetsInputBoundary {
             ArrayList<Integer> newField = cardStuff.expandField();
             ArrayList<Integer> newCards = new ArrayList<>(newField);
             newCards.removeAll(removeField);
-            NoSetsOutputData outputData = new NoSetsOutputData(newField, newCards);
+            SetsOutputData outputData = new SetsOutputData(newField, newCards);
 
             noSetsPresenter.prepareSuccessView(outputData);
         }

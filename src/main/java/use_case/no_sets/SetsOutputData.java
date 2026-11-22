@@ -5,13 +5,13 @@ import java.util.ArrayList;
 /**
  * An object for the return data of the No Sets use case.
  */
-public class NoSetsOutputData {
+public class SetsOutputData {
 
     private final ArrayList<Integer> field;
 
     private final ArrayList<Integer> added;
 
-    public NoSetsOutputData (ArrayList<Integer> field, ArrayList<Integer> added) {
+    public SetsOutputData (ArrayList<Integer> field, ArrayList<Integer> added) {
         this.field = field;
         this.added = added;
     }
