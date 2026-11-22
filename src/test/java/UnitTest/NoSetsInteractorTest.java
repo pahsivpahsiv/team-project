@@ -11,7 +11,7 @@ public class NoSetsInteractorTest {
     @Test
     void testExecute() {
         CardStuff cardStuff = new CardStuff();
-        NoSetsOutputBoundary presenter = new TestPresenter();
+        NoSetsOutputBoundary presenter = new NoSetsTestPresenter();
         NormalSetChecker setChecker = new NormalSetChecker(cardStuff);
         NoSetsInteractor interactor = new NoSetsInteractor(presenter, cardStuff, setChecker);
         interactor.execute(cardStuff.getField());

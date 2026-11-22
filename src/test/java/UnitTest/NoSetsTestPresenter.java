@@ -2,7 +2,7 @@ package UnitTest;
 import use_case.no_sets.NoSetsOutputBoundary;
 import use_case.no_sets.SetsOutputData;
 
-public class TestPresenter implements NoSetsOutputBoundary {
+public class NoSetsTestPresenter implements NoSetsOutputBoundary {
     @Override
     public void prepareSuccessView(SetsOutputData outputData) {
         System.out.println("success, there are no sets.");
