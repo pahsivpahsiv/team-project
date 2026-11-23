@@ -1,6 +1,8 @@
 package use_case.set_check;
 
 import entity.CardStuff;
+import entity.GameState;
+import use_case.no_sets.NormalSetChecker;
 import use_case.no_sets.SetCheckerStrategy;
 import use_case.no_sets.SetsOutputData;
 
@@ -14,12 +16,21 @@ public class SetCheckInteractor implements SetCheckInputBoundary{
     private final SetCheckOutputBoundary setCheckPresenter;
     private final CardStuff cardStuff;
     private final SetCheckerStrategy setChecker;
+    private final GameState gameState;
 
     public SetCheckInteractor(SetCheckOutputBoundary setCheckPresenter, CardStuff cardStuff,
-                              SetCheckerStrategy setChecker) {
+                              GameState gameState) {
         this.setCheckPresenter = setCheckPresenter;
         this.cardStuff = cardStuff;
-        this.setChecker = setChecker;
+        this.gameState = gameState;
+
+        if (this.gameState.getMode().equals(GameState.GameMode.ANTI_SET)) {
+            this.setChecker = new AntiSetChecker(this.cardStuff);
+        } else if (this.gameState.getMode().equals(GameState.GameMode.GHOST_SET)) {
+            this.setChecker = new GhostSetChecker(this.cardStuff);
+        } else {
+            this.setChecker = new NormalSetChecker(this.cardStuff);
+        }
     }
 
     @Override
@@ -37,7 +48,13 @@ public class SetCheckInteractor implements SetCheckInputBoundary{
             SetsOutputData output = new SetsOutputData(newField, newCards);
             setCheckPresenter.prepareSuccessView(output);
         } else {
-            setCheckPresenter.prepareFailView("This is not a set.");
+            if (this.gameState.getMode().equals(GameState.GameMode.ANTI_SET)) {
+                setCheckPresenter.prepareFailView("This is not an anti-set.");
+            } else if (this.gameState.getMode().equals(GameState.GameMode.GHOST_SET)) {
+                setCheckPresenter.prepareFailView("This is not a ghost set.");
+            } else {
+                setCheckPresenter.prepareFailView("This is not a set.");
+            }
         }
     }
 }
