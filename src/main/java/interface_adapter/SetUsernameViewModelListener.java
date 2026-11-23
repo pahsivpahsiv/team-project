@@ -1,4 +1,6 @@
 package interface_adapter;
 
-public class SetUsernameViewModelListener {
+public interface SetUsernameViewModelListener {
+
+    void stateChanged();
 }

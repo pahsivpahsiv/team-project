@@ -1,31 +1,42 @@
 package Use_case.SetUsername;
 import entity.Player;
-public class SetUsernameInteractor {
+
+public class SetUsernameInteractor implements SetUsernameInputBoundary {
 
     private final SetUsernameUserDataAccessInterface userDataAccessObject;
-    private final SetUsernameOutputBoundary SetUsernamePresenter;
+    private final SetUsernameOutputBoundary setUsernamePresenter;
 
     public SetUsernameInteractor(SetUsernameUserDataAccessInterface userDataAccessInterface,
                            SetUsernameOutputBoundary loginOutputBoundary) {
         this.userDataAccessObject = userDataAccessInterface;
-        this.SetUsernamePresenter = loginOutputBoundary;
+        this.setUsernamePresenter = loginOutputBoundary;
     }
 
     @Override
     public void execute(SetUsernameInputData loginInputData) {
+
         final String username = loginInputData.getUsername();
-        if (!userDataAccessObject.existsByName(username)) {
-            loginPresenter.prepareFailView(username + ": Account does not exist.");
+
+        if (username == null || username.trim().isEmpty()) {
+            setUsernamePresenter.prepareFailView("Username cannot be empty.");
+            return;
         }
-            else {
 
-                final Player player = userDataAccessObject.get(SetUsernameInputData.getUsername());
+        final Player player;
 
-                userDataAccessObject.setCurrentUsername(username);
-
-                final SetUsernameOutputData loginOutputData = new SetUsernameOutputData(player.getName());
-                SetUsernamePresenter.prepareSuccessView(loginOutputData);
-            }
+        if (userDataAccessObject.existsByName(username)) {
+            player = userDataAccessObject.get(username);
         }
+        else {
+            player = new Player(username);
+            userDataAccessObject.save(player);
+        }
+
+        userDataAccessObject.setCurrentUsername(username);
+
+        final SetUsernameOutputData outputData =
+                new SetUsernameOutputData(player.getUsername());
+
+        setUsernamePresenter.prepareSuccessView(outputData);
     }
 }

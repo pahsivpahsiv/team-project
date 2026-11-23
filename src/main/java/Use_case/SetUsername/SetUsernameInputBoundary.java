@@ -12,4 +12,3 @@ public interface SetUsernameInputBoundary {
          */
         void execute(SetUsernameInputData SetUsernameInputData);
     }
-}
