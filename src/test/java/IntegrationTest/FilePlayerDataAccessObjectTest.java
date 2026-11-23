@@ -1,4 +1,4 @@
-package UnitTest;
+package IntegrationTest;
 
 import data_access.FilePlayerDataAccessObject;
 import entity.Player;
@@ -82,6 +82,4 @@ public class FilePlayerDataAccessObjectTest {
             Files.deleteIfExists(file);
         }
     }
-
-
 }
