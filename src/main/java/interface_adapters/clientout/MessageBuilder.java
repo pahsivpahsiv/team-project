@@ -8,14 +8,14 @@ import network.client.messages.NetworkRequest;
  */
 public class MessageBuilder {
     private final int playerId;
-    private network.client.messages.NetworkRequest.NetworkRequest output;
+    private network.client.messages.NetworkRequest output;
     public MessageBuilder(int playerId){
         this.playerId = playerId;
     }
     public MessageBuilder cardIds(){
         return this;
     }
-    public NetworkRequest.NetworkRequest build(){
+    public NetworkRequest build(){
         return output;
     }
 
