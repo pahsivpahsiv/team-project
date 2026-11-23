@@ -2,6 +2,7 @@ package network.client.outputs;
 
 
 import network.client.messages.NetworkRequest;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -10,17 +11,20 @@ import java.net.Socket;
 
 public class ClientSocketBroadcaster implements ClientOutput{
 
-    private Socket socket; // may not need to store
-    private PrintWriter out;
+    private final Socket socket; // may not need to store
+    private final PrintWriter out;
+    private final ObjectMapper mapper;
+
     public ClientSocketBroadcaster(Socket socket) throws IOException {
         this.socket = socket;
         OutputStream outputStream = socket.getOutputStream();
         out = new PrintWriter(outputStream);
+        mapper = new ObjectMapper();
     }
 
     @Override
-    public int send(NetworkRequest message){
-        out.println();
-        return 0; // fix to return
+    public boolean send(NetworkRequest message){
+        out.println(message);
+        return !out.checkError();
     }
 }

@@ -9,11 +9,11 @@ public record NetworkRequest(
         JsonNode data
 ) {
     /*
-    Placeholder message types for now
+    Placeholder message types
      */
     public enum MessageType{
         SET_FOUND,
-        NO_SET,
+        NO_SETS,
         EXIT_GAME,
         CONNECTION_FOUND
     }

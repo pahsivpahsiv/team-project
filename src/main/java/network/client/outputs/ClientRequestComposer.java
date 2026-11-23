@@ -1,15 +1,16 @@
 package network.client.outputs;
 
-import interface_adapters.clientout.ControllerOutput;
+import interface_adapters.clientout.NetworkInputBoundary;
+import network.client.messages.NetworkRequest;
 
-public class ClientRequestComposer implements ControllerOutput {
+public class ClientRequestComposer implements NetworkInputBoundary {
 
-    private final ClientSocketBroadcaster broadcaster;
+    private final ClientOutput broadcaster;
     public ClientRequestComposer(ClientSocketBroadcaster broadcaster) {
         this.broadcaster = broadcaster;
     }
     @Override
-    public void sendOutput(NetworkOutputData outputData){
-
+    public void sendOutput(NetworkRequest outputData){
+        broadcaster.send(outputData);
     }
 }
