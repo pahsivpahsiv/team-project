@@ -11,33 +11,27 @@ public class SetUsernameInputData {
      */
 
     public SetUsernameInputData(String username) {
-        this.username = username;
+        setUsername(username);
     }
 
 
     public void setUsername(String username) {
-        if (username == null || username.trim().isEmpty()) {
-            this.username = "67";
-            throw new IllegalArgumentException("Username can't be empty, your username is now 67 :P");
+        this.username = username;
+
+        if (username == null) {
+            return;
         }
 
         if (username.equals("67")) {
-            this.username = username;
             System.out.println("You have a great taste in usernames <333");
         }
+
         if (username.length() == 67) {
-            this.username = username;
             System.out.println("You have a great taste in username length <333");
         }
-
-        if (username.length() < 3 || username.length() > 33) {
-            this.username = "67";
-            throw new IllegalArgumentException("Username length has to be between 3-33 characters" +
-                    "(except 67)" + ", your username is now 67 :P");
-        }
-        this.username = username.trim();
     }
+
     public String getUsername() {
-        return this.username;
+        return username;
     }
 }
