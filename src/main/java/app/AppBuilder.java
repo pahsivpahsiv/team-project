@@ -40,9 +40,9 @@ public class AppBuilder {
 
     public AppBuilder addScreenRegions() {
         var partition = new UIPartition(mainPanel, new int[][]{
-                {0, 1, 2},
-                {3, 4, 4},
-                {5, 5, 5},
+                {0, 1, 1, 2},
+                {3, 4, 4, 4},
+                {5, 5, 5, 5},
         });
         screenRegions = partition.map;
 
