@@ -10,15 +10,15 @@ public interface SetUsernameUserDataAccessInterface {
     boolean existsByName(String username);
 
     /**
-     * Saves the user.
-     * @param user the user to save
+     * Saves the player.
+     * @param player the user to save
      */
     void save(Player player);
 
     /**
-     * Returns the user with the given username.
+     * Returns the player with the given username.
      * @param username the username to look up
-     * @return the user with the given username
+     * @return the player with the given username
      */
     Player get(String username);
 
