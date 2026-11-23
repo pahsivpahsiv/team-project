@@ -35,7 +35,7 @@ public class PauseGameInteractor implements PauseGameInputBoundary {
     public void resume() {
         if (gameState.getStatus() != GameState.GameStatus.PAUSED) {
             pauseGamePresenter.prepareFailView(
-                    "The game is already playing.");
+                    "The game is not paused.");
             return;
         }
 
