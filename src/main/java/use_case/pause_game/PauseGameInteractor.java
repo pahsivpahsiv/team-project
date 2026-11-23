@@ -15,11 +15,20 @@ public class PauseGameInteractor implements PauseGameInputBoundary {
         this.gameState = gameState;
     }
 
+
     @Override
     public void pause() {
+        if (gameState.getStatus() == GameState.GameStatus.ENDED) {
+            pauseGamePresenter.prepareFailView(
+                    "Cannot pause a game that has ended."
+            );
+            return;
+        }
+
         if (gameState.getStatus() == GameState.GameStatus.PAUSED) {
             pauseGamePresenter.prepareFailView(
-                    "The game is already paused.");
+                    "The game is already paused."
+            );
             return;
         }
 
@@ -33,9 +42,17 @@ public class PauseGameInteractor implements PauseGameInputBoundary {
 
     @Override
     public void resume() {
-        if (gameState.getStatus() != GameState.GameStatus.PAUSED) {
+        if (gameState.getStatus() == GameState.GameStatus.ENDED) {
             pauseGamePresenter.prepareFailView(
-                    "The game is not paused.");
+                    "Cannot resume a game that has ended."
+            );
+            return;
+        }
+
+        if (gameState.getStatus() == GameState.GameStatus.PLAYING) {
+            pauseGamePresenter.prepareFailView(
+                    "The game is already playing."
+            );
             return;
         }
 
