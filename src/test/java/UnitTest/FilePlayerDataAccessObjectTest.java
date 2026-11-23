@@ -57,4 +57,31 @@ public class FilePlayerDataAccessObjectTest {
         }
     }
 
+    @Test
+    void testUpdatedBestTimeIsPersisted() throws Exception {
+        Path file = Files.createTempFile("players-test", ".txt");
+
+        try {
+            FilePlayerDataAccessObject dao =
+                    new FilePlayerDataAccessObject(file.toString());
+
+            Player player = new Player("Romina");
+            player.updateBestTime(50);
+            dao.save(player);
+
+            player.updateBestTime(30);
+            dao.save(player);
+
+            FilePlayerDataAccessObject reloadedDao =
+                    new FilePlayerDataAccessObject(file.toString());
+
+            assertEquals(30,
+                    reloadedDao.get("Romina").getBestTime());
+        }
+        finally {
+            Files.deleteIfExists(file);
+        }
+    }
+
+
 }

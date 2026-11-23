@@ -22,6 +22,14 @@ public class SetUsernameInteractor implements SetUsernameInputBoundary {
             return;
         }
 
+        if (username.contains("\t")
+                || username.contains("\n")
+                || username.contains("\r")) {
+            setUsernamePresenter.prepareFailView(
+                    "Username contains invalid characters.");
+            return;
+        }
+
         final Player player;
 
         if (userDataAccessObject.existsByName(username)) {
