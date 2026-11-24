@@ -2,6 +2,7 @@ package use_case.set_check;
 
 import entity.CardStuff;
 import entity.GameState;
+import entity.Player;
 import use_case.no_sets.NormalSetChecker;
 import use_case.no_sets.SetCheckerStrategy;
 import use_case.no_sets.SetsOutputData;
@@ -34,18 +35,24 @@ public class SetCheckInteractor implements SetCheckInputBoundary{
     }
 
     @Override
-    public void execute(ArrayList<Integer> inputData) {
-        boolean result = setChecker.checkSet(inputData);
+    public void execute(SetCheckInputData inputData) {
+        boolean result = setChecker.checkSet(inputData.getCards());
         if (result) {
-            ArrayList<Integer> oldField = new ArrayList<>(inputData);
-            ArrayList<Integer> newField = cardStuff.replaceCards(inputData);
+            ArrayList<Integer> oldField = new ArrayList<>(inputData.getCards());
+            ArrayList<Integer> newField = cardStuff.replaceCards(inputData.getCards());
             ArrayList<Integer> newCards = new ArrayList<>();
             for (int id : newField) {
                 if (!oldField.contains(id)) {
                     newCards.add(id);
                 }
             }
-            SetsOutputData output = new SetsOutputData(newField, newCards);
+
+            Player player = gameState.getPlayer(inputData.getUsername());
+            player.incrementScore();
+            int score = player.getScore();
+
+            SetCheckOutputData output = new SetCheckOutputData(newField, newCards,
+                    score, player.getUsername());
             setCheckPresenter.prepareSuccessView(output);
         } else {
             if (this.gameState.getMode().equals(GameState.GameMode.ANTI_SET)) {
