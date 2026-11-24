@@ -8,5 +8,5 @@ public interface SetCheckInputBoundary {
      * Execute the Set Check Use Case.
      * @param inputData the input data for this use case
      */
-    void execute(ArrayList<Integer> inputData);
+    void execute(SetCheckInputData inputData);
 }
