@@ -23,16 +23,16 @@ public class GameState {
     private CardStuff cardStuff;
     private GameStatus status;
     private GameMode mode;
-    private HashMap<String, Player> players;
+    private HashMap<Integer, Player> players;
 
     public GameState(CardStuff cardStuff, GameMode mode, Player[] players) {
         this.time = 0;
         this.cardStuff = Objects.requireNonNull(cardStuff);
         this.status = GameStatus.PLAYING;
         this.mode = Objects.requireNonNull(mode);
-        HashMap<String, Player> hashPlayers = new HashMap<>();
+        HashMap<Integer, Player> hashPlayers = new HashMap<>();
         for (Player player : players) {
-            hashPlayers.put(player.getUsername(), player);
+            hashPlayers.put(player.getId(), player);
         }
         this.players = hashPlayers;
     }
@@ -73,7 +73,7 @@ public class GameState {
         this.mode = Objects.requireNonNull(mode);
     }
 
-    public Player getPlayer(String username) { 
-        return this.players.get(username); 
+    public Player getPlayer(int id) {
+        return this.players.get(id);
     }
 }
