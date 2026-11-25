@@ -4,6 +4,7 @@ package UnitTest;
 import entity.CardStuff;
 import entity.GameState;
 
+import entity.Player;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,17 +13,28 @@ class GameStateTest {
 
     private GameState createGame() {
         CardStuff cards = new CardStuff();
+        Player player = new Player("alice", 1);
+        Player player1 = new Player("bob", 2);
+        Player player2 = new Player("cleo", 3);
 
         return new GameState(
-                cards, GameState.GameMode.SET);
+                cards, GameState.GameMode.SET, new Player[] {player, player1, player2});
+    }
+
+    private GameState createBadGame() {
+        CardStuff cards = new CardStuff();
+        Player player1 = new Player("alice", 1);
+        Player player2 = new Player("alice", 1);
+        return new GameState(
+                cards, GameState.GameMode.SET, new Player[] {player1, player2});
     }
 
     @Test
     void testConstructor() {
         CardStuff cards = new CardStuff();
-
+        Player player = new Player("alice", 1);
         GameState game = new GameState(
-                cards, GameState.GameMode.SET);
+                cards, GameState.GameMode.SET, new Player[] {player});
 
         assertEquals(0, game.getTime());
         assertSame(cards, game.getCardStuff());
@@ -30,6 +42,11 @@ class GameStateTest {
                 game.getStatus());
         assertEquals(GameState.GameMode.SET,
                 game.getMode());
+    }
+
+    @Test
+    void testConctructorException() {
+        assertThrows(IllegalArgumentException.class, () -> createBadGame());
     }
 
     @Test
@@ -96,18 +113,25 @@ class GameStateTest {
     }
 
     @Test
+    void testGetPlayer() {
+        GameState game = createGame();
+        assertEquals(1, game.getPlayer(1).getId());
+    }
+
+    @Test
     void testNullCardStuff() {
+        Player player = new Player("alice", 1);
         assertThrows(NullPointerException.class,
                 () -> new GameState(
-                        null, GameState.GameMode.SET));
+                        null, GameState.GameMode.SET, new Player[] {player}));
     }
 
     @Test
     void testNullMode() {
         CardStuff cards = new CardStuff();
-
+        Player player = new Player("alice", 1);
         assertThrows(NullPointerException.class,
-                () -> new GameState(cards, null));
+                () -> new GameState(cards, null, new Player[] {player}));
     }
 
     @Test
