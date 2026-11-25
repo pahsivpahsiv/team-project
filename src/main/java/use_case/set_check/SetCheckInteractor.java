@@ -19,11 +19,11 @@ public class SetCheckInteractor implements SetCheckInputBoundary{
     private final SetCheckerStrategy setChecker;
     private final GameState gameState;
 
-    public SetCheckInteractor(SetCheckOutputBoundary setCheckPresenter, CardStuff cardStuff,
+    public SetCheckInteractor(SetCheckOutputBoundary setCheckPresenter,
                               GameState gameState) {
         this.setCheckPresenter = setCheckPresenter;
-        this.cardStuff = cardStuff;
         this.gameState = gameState;
+        this.cardStuff = gameState.getCardStuff();
 
         if (this.gameState.getMode().equals(GameState.GameMode.ANTI_SET)) {
             this.setChecker = new AntiSetChecker(this.cardStuff);

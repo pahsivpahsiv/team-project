@@ -1,6 +1,7 @@
 package use_case.no_sets;
 
 import entity.CardStuff;
+import entity.GameState;
 
 import java.util.ArrayList;
 
@@ -12,9 +13,10 @@ public class NoSetsInteractor implements NoSetsInputBoundary {
     private final CardStuff cardStuff;
     private final SetCheckerStrategy setChecker;
 
-    public NoSetsInteractor (NoSetsOutputBoundary noSetsPresenter, CardStuff cardStuff, SetCheckerStrategy setChecker) {
+    public NoSetsInteractor (NoSetsOutputBoundary noSetsPresenter, GameState gameState,
+                             SetCheckerStrategy setChecker) {
         this.noSetsPresenter = noSetsPresenter;
-        this.cardStuff = cardStuff;
+        this.cardStuff = gameState.getCardStuff();
         this.setChecker = setChecker;
     }
 
