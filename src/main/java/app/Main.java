@@ -1,5 +1,12 @@
 package app;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.jthemedetecor.OsThemeDetector;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +19,8 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
+        FlatLafSetup.init();
+
         // Sets up the app data directories (for image/file IO uploads and such)
         Path appDataDir = Paths.get(System.getProperty("user.home"), ".setgame");
         Path uploadsDir = appDataDir.resolve("uploads");
