@@ -5,5 +5,5 @@ package use_case.end_game;
  */
 public interface EndGameInputBoundary {
 
-    void endGame();
+    void endGame(int id);
 }

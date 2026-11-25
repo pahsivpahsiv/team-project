@@ -18,7 +18,7 @@ public class EndGameController {
     /**
      * Ends the game early. Called when the player clicks "End game".
      */
-    public void endGame() {
-        endGameInteractor.endGame();
+    public void endGame(int id) {
+        endGameInteractor.endGame(id);
     }
 }

@@ -5,18 +5,18 @@ package use_case.end_game;
  */
 public class EndGameOutputData {
 
-    private final String username;
+    private final int id;
     private final int score;
     private final long timePlayed;
 
-    public EndGameOutputData(String username, int score, long timePlayed) {
-        this.username = username;
+    public EndGameOutputData(int id, int score, long timePlayed) {
+        this.id = id;
         this.score = score;
         this.timePlayed = timePlayed;
     }
 
-    public String getUsername() {
-        return username;
+    public String getId() {
+        return id;
     }
 
     public int getScore() {
