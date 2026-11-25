@@ -15,7 +15,7 @@ public class EndGameOutputData {
         this.timePlayed = timePlayed;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
