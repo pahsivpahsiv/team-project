@@ -47,12 +47,11 @@ public class SetCheckInteractor implements SetCheckInputBoundary{
                 }
             }
 
-            Player player = gameState.getPlayer(inputData.getUsername());
+            Player player = gameState.getPlayer(inputData.getId());
             player.incrementScore();
-            int score = player.getScore();
 
             SetCheckOutputData output = new SetCheckOutputData(newField, newCards,
-                    score, player.getUsername());
+                    player.getScore(), player.getId());
             setCheckPresenter.prepareSuccessView(output);
         } else {
             if (this.gameState.getMode().equals(GameState.GameMode.ANTI_SET)) {
