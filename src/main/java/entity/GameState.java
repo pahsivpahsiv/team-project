@@ -32,6 +32,10 @@ public class GameState {
         this.mode = Objects.requireNonNull(mode);
         HashMap<Integer, Player> hashPlayers = new HashMap<>();
         for (Player player : players) {
+            if (hashPlayers.containsKey(player.getId())) {
+                throw new IllegalArgumentException(
+                        "Two players cannot have the same id");
+            }
             hashPlayers.put(player.getId(), player);
         }
         this.players = hashPlayers;
