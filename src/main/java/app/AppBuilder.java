@@ -3,6 +3,7 @@ package app;
 import ui.IMenuGrafter;
 import ui.MGHelpers;
 import ui.components.MGButtonGroup;
+import ui.components.MGSetCard;
 import ui.layout.UIPartition;
 
 import javax.swing.*;
@@ -43,7 +44,7 @@ public class AppBuilder {
                 {0, 1, 1, 2},
                 {3, 4, 4, 4},
                 {5, 5, 5, 5},
-        });
+        }, UIPartition.ImageType.Default);
         screenRegions = partition.map;
 
         for (int i : screenRegions.keySet()){
@@ -67,6 +68,19 @@ public class AppBuilder {
         }));
 
         return this;
+    }
+
+    public AppBuilder addTestCard(){
+        MGSetCard setCard = new MGSetCard();
+        setCard.graft(screenRegions.get(0), new MGSetCard.Params());
+
+        return this;
+    }
+
+    public void addRelationalHarms() {
+        // TODO: implement sexism?
+        // TODO: HR violations
+        // TODO: remove this before the presentation
     }
 
     public JFrame build() {

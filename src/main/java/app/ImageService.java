@@ -4,6 +4,11 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import com.github.weisj.jsvg.SVGDocument;
+import com.github.weisj.jsvg.parser.SVGLoader;
+import com.github.weisj.jsvg.view.ViewBox;
+
+import java.net.URL;
 import java.util.Objects;
 
 public class ImageService {
@@ -18,34 +23,40 @@ public class ImageService {
      * @param index The index within the collection of set images
      * @return
      */
-    public static BufferedImage getCardImage(String collection, int index) {
-        InputStream is = null;
+    public static SVGDocument getCardImage(String collection, int index) {
+        URL url = null;
+        System.out.println(collection);
         if(collection.equals(DEFAULT_IMAGE_SUBDIRECTORY)) {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
             try {
-                is = classloader.getResourceAsStream("images/" + index);
-            } catch (RuntimeException e) {
+                url = classloader.getResource("images/" + index + ".svg");
+            } catch (NullPointerException e) {
                 System.out.println("Set component index was out of range or images directory does not exist");
+                throw new RuntimeException(e);
+            } catch (Exception e) {
+                System.out.println("Unknown exception caught");
                 throw new RuntimeException(e);
             }
         }
         else {
+            FileHelper.getUploadDir();
             // TODO: fill in with custom image directory logic
         }
-        if(is == null) {
+        if(url == null) {
             System.out.println("WARNING: you attempted to access " + collection + " but custom images " +
                     "are unsupported");
             return null;
         }
         try {
-            return ImageIO.read(is);
-        } catch (IOException e) {
+            SVGLoader loader = new SVGLoader();
+            return loader.load(Objects.requireNonNull(url, "SVG file not found"));
+        } catch (Exception e) { // TODO: fix this too
             System.out.println("Could not read image from " + collection + " index " + index);
             throw new RuntimeException(e);
         }
     }
 
-    public static BufferedImage getCardImage(int index) {
+    public static SVGDocument getCardImage(int index) {
         return getCardImage(DEFAULT_IMAGE_SUBDIRECTORY, index);
     }
 

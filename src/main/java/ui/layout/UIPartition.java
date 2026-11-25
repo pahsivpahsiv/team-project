@@ -1,5 +1,7 @@
 package ui.layout;
 
+import ui.SVGPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
@@ -13,27 +15,34 @@ public class UIPartition {
     public final Map<Integer, JPanel> map;
     private final int[][] partitionMap;
 
+    public enum ImageType {
+        Default,
+        SVG
+    }
+
     /**
      * A partitioner that takes an int[][] and produces a map of JPanels which can be consumed elsewhere.
      * @param partitionMap The IDs corresponding to each spatial position.
      * PRECONDITION: partitionMap does not contain more partitions than its highest key, TODO fix this
      */
-    public UIPartition(JPanel parent, int[][] partitionMap) {
+    public UIPartition(JPanel parent, int[][] partitionMap, ImageType imageType) {
         this.partitionMap = partitionMap;
         this.map = buildMap(parent, Arrays
                 .stream(partitionMap)
                 .flatMapToInt(Arrays::stream)
                 .max()
-                .orElse(Integer.MIN_VALUE));
+                .orElse(Integer.MIN_VALUE), imageType);
     }
 
+
     /**
-     * Builds a map of the input ids to a grid of JPanels under a GridBagLayout
-     * @param parent The parent to partition with a GridBagLayout
-     * @param max The maximum number of entries that could populate this map; saves memory on HashMap init
-     * @return A map of the partitioned panels.
-     */
-    private Map<Integer, JPanel> buildMap(JPanel parent, int max){
+    * Builds a map of the input ids to a grid of JPanels under a GridBagLayout
+    * @param parent The parent to partition with a GridBagLayout
+    * @param max The maximum number of entries that could populate this map; saves memory on HashMap init
+    * @param imageType The image file type that is expected to be used.
+    * @return A map of the partitioned panels.
+    */
+    private Map<Integer, JPanel> buildMap(JPanel parent, int max, ImageType imageType){
         GridBagLayout layout = new GridBagLayout();
         GridBagConstraints constraints = new GridBagConstraints();
         parent.setLayout(layout);
@@ -64,7 +73,11 @@ public class UIPartition {
 
                 System.out.print("(" + constraints.gridx + ", " + constraints.gridy + " - " + constraints.gridwidth + ", " + constraints.gridheight + ") ");
 
-                var panel = new JPanel();
+                JPanel panel = null;
+                if(imageType == ImageType.Default)
+                    panel = new JPanel(null);
+                if(imageType == ImageType.SVG)
+                    panel = new SVGPanel(null);
                 parent.add(panel, constraints);
                 toReturn.put(partitionMap[y][x], panel);
             }

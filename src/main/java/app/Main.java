@@ -28,6 +28,7 @@ public class Main {
                 .setupMainPanel()
                 .addScreenRegions()
                 .addControlFlow()
+                .addTestCard()
                 .build();
 
         application.pack();
