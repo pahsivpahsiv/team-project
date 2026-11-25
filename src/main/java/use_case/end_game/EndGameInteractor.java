@@ -14,8 +14,7 @@ public class EndGameInteractor implements EndGameInputBoundary {
 
     public EndGameInteractor(
             EndGameOutputBoundary endGamePresenter,
-            GameState gameState,
-            Player player) {
+            GameState gameState) {
         this.endGamePresenter = endGamePresenter;
         this.gameState = gameState;
     }
