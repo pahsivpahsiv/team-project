@@ -1,11 +1,8 @@
 package app;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.jthemedetecor.OsThemeDetector;
+import app.scene_builders.AppBuilder;
+import app.scene_builders.MenuBuilder;
+import app.scene_builders.SceneLoader;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -19,7 +16,8 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        FlatLafSetup.init();
+
+        // --------------------------= FileIO Setup =--------------------------
 
         // Sets up the app data directories (for image/file IO uploads and such)
         Path appDataDir = Paths.get(System.getProperty("user.home"), ".setgame");
@@ -32,13 +30,19 @@ public class Main {
             // throw new RuntimeException(e); <-- TODO - litigate this better
         }
 
+        // --------------------------= Swing // UI Setup =---------------------------
+
+        FlatLafSetup.init();
+
         AppBuilder appBuilder = new AppBuilder();
         JFrame application = appBuilder
-                .setupMainPanel()
-                .addScreenRegions()
-                .addControlFlow()
-                .addTestCard()
+                .createApplication()
+                .setupApplication()
                 .build();
+        SceneLoader.EnterApplication(appBuilder);
+
+        MenuBuilder menuBuilder = new MenuBuilder(appBuilder);
+        SceneLoader.EnterScene(menuBuilder);
 
         application.pack();
         application.setLocationRelativeTo(null);

@@ -14,7 +14,7 @@ public class FlatLafSetup {
     private static void changeTheme(Boolean isDark) {
         if (isDark) {
             // The OS switched to a dark theme
-            FlatMacDarkLaf.setup();
+            FlatMacLightLaf.setup();
         } else {
             // The OS switched to a light theme
             FlatMacLightLaf.setup();

@@ -6,6 +6,7 @@ import ui.SVGPanel;
 import ui.layout.UIPartition;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -34,6 +35,8 @@ public class MGSetCard implements IMenuGrafter<MGSetCard.Params> {
         constraints.gridy = 1;
 
         JPanel card = new JPanel();
+        card.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.GRAY, Color.WHITE));
+
         UIPartition cardPartition = new UIPartition(card, new int[][]{
                 { 0, 1, 2 },
                 { 3, 4, 5 },
@@ -41,11 +44,11 @@ public class MGSetCard implements IMenuGrafter<MGSetCard.Params> {
         }, UIPartition.ImageType.SVG);
 //        cardPartition.map.get(4).setBackground(Color.BLUE);
 
-        for (int i : new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8}) {
-            ((SVGPanel)cardPartition.map.get(i)).setDocument( // TODO: avoid this cast
+//        for (int i : new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8}) {
+            ((SVGPanel)cardPartition.map.get(4)).setDocument( // TODO: avoid this cast
                 ImageService.getCardImage(3)
             );
-        }
+//        }
 
         parent.add(card, constraints);
     }
