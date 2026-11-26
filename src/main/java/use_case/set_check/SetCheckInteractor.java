@@ -38,7 +38,7 @@ public class SetCheckInteractor implements SetCheckInputBoundary{
     public void execute(SetCheckInputData inputData) {
         boolean result = setChecker.checkSet(inputData.getCards());
         if (result) {
-            ArrayList<Integer> oldField = new ArrayList<>(inputData.getCards());
+            ArrayList<Integer> oldField = new ArrayList<>(cardStuff.getField());
             ArrayList<Integer> newField = cardStuff.replaceCards(inputData.getCards());
             ArrayList<Integer> newCards = new ArrayList<>();
             for (int id : newField) {
