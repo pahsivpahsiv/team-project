@@ -1,7 +1,7 @@
 
 package data_access;
 
-import Use_case.SetUsername.SetUsernameUserDataAccessInterface;
+import use_case.SetUsername.SetUsernameUserDataAccessInterface;
 import entity.Player;
 
 import java.io.*;
@@ -48,13 +48,14 @@ public class FilePlayerDataAccessObject
                     if (!line.isBlank()) {
                         String[] data = line.split("\t", -1);
 
-                        if (data.length != 2) {
+                        if (data.length != 3) {
                             throw new IllegalArgumentException(
                                     "Invalid player record: " + line);
                         }
 
-                        Player player = new Player(data[0]);
-                        long bestTime = Long.parseLong(data[1]);
+                        int id = Integer.parseInt(data[1]);
+                        Player player = new Player(data[0], id);
+                        long bestTime = Long.parseLong(data[2]);
 
                         if (bestTime != -1) {
                             player.updateBestTime(bestTime);
@@ -75,8 +76,8 @@ public class FilePlayerDataAccessObject
 
     /**
      * Writes all players to the TXT file.
-     * Each line contains a username and best time,
-     * separated by a tab character.
+     * Each line contains a username, player ID, and best time,
+     * separated by tab characters.
      *
      * @throws RuntimeException if writing to the file fails
      */
@@ -86,6 +87,7 @@ public class FilePlayerDataAccessObject
 
             for (Player player : players.values()) {
                 writer.write(player.getUsername()
+                        + "\t" + player.getId()
                         + "\t" + player.getBestTime());
                 writer.newLine();
             }
@@ -104,6 +106,21 @@ public class FilePlayerDataAccessObject
     @Override
     public boolean existsByName(String username) {
         return players.containsKey(username);
+    }
+
+    /**
+     * Returns the next available player ID.
+     *
+     * @return the next available player ID
+     */
+    public int getNextPlayerId() {
+        int nextId = 0;
+
+        for (Player player : players.values()) {
+            nextId = Math.max(nextId, player.getId() + 1);
+        }
+
+        return nextId;
     }
 
     @Override
