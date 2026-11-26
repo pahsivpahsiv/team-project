@@ -1,4 +1,4 @@
-package use_case.set_username;
+package use_case.SetUsername;
 
 /**
  * Input Boundary for actions which are related to Setting up the username.

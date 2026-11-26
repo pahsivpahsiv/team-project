@@ -1,11 +1,11 @@
 
 package UnitTest;
 
-import use_case.set_username.SetUsernameInputData;
-import use_case.set_username.SetUsernameInteractor;
-import use_case.set_username.SetUsernameOutputBoundary;
-import use_case.set_username.SetUsernameOutputData;
-import use_case.set_username.SetUsernameUserDataAccessInterface;
+import use_case.SetUsername.SetUsernameInputData;
+import use_case.SetUsername.SetUsernameInteractor;
+import use_case.SetUsername.SetUsernameOutputBoundary;
+import use_case.SetUsername.SetUsernameOutputData;
+import use_case.SetUsername.SetUsernameUserDataAccessInterface;
 import entity.Player;
 import org.junit.jupiter.api.Test;
 

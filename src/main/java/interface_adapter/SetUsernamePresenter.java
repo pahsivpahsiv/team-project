@@ -1,8 +1,8 @@
 
 package interface_adapter;
 
-import use_case.set_username.SetUsernameOutputBoundary;
-import use_case.set_username.SetUsernameOutputData;
+import use_case.SetUsername.SetUsernameOutputBoundary;
+import use_case.SetUsername.SetUsernameOutputData;
 
 public class SetUsernamePresenter implements SetUsernameOutputBoundary {
 
