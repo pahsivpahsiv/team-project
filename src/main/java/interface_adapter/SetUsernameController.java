@@ -1,7 +1,7 @@
 package interface_adapter;
 
-import Use_case.SetUsername.SetUsernameInputBoundary;
-import Use_case.SetUsername.SetUsernameInputData;
+import use_case.set_username.SetUsernameInputBoundary;
+import use_case.set_username.SetUsernameInputData;
 
     public class SetUsernameController {
 

@@ -1,11 +1,11 @@
 
 package UnitTest;
 
-import Use_case.SetUsername.SetUsernameInputData;
-import Use_case.SetUsername.SetUsernameInteractor;
-import Use_case.SetUsername.SetUsernameOutputBoundary;
-import Use_case.SetUsername.SetUsernameOutputData;
-import Use_case.SetUsername.SetUsernameUserDataAccessInterface;
+import use_case.set_username.SetUsernameInputData;
+import use_case.set_username.SetUsernameInteractor;
+import use_case.set_username.SetUsernameOutputBoundary;
+import use_case.set_username.SetUsernameOutputData;
+import use_case.set_username.SetUsernameUserDataAccessInterface;
 import entity.Player;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +22,17 @@ class SetUsernameInteractorTest {
 
         private final Map<String, Player> players = new HashMap<>();
         private String currentUsername;
+
+        @Override
+        public int getNextPlayerId() {
+            int nextId = 0;
+
+            for (Player player : players.values()) {
+                nextId = Math.max(nextId, player.getId() + 1);
+            }
+
+            return nextId;
+        }
 
         @Override
         public boolean existsByName(String username) {
@@ -85,7 +96,7 @@ class SetUsernameInteractorTest {
     void testExistingUsernameKeepsBestTime() {
         FakePlayerDAO dao = new FakePlayerDAO();
 
-        Player player = new Player("Michelle");
+        Player player = new Player("Thea", 0);
         player.updateBestTime(30);
         dao.save(player);
 
@@ -93,10 +104,10 @@ class SetUsernameInteractorTest {
         SetUsernameInteractor interactor =
                 new SetUsernameInteractor(dao, presenter);
 
-        interactor.execute(new SetUsernameInputData("Michelle"));
+        interactor.execute(new SetUsernameInputData("Thea"));
 
         assertTrue(presenter.success);
-        assertEquals(30, dao.get("Michelle").getBestTime());
+        assertEquals(30, dao.get("Thea").getBestTime());
     }
 
     @Test
@@ -134,11 +145,68 @@ class SetUsernameInteractorTest {
         SetUsernameInteractor interactor =
                 new SetUsernameInteractor(dao, presenter);
 
-        interactor.execute(new SetUsernameInputData("Michelle\tLi"));
+        interactor.execute(new SetUsernameInputData("Nai\tWa"));
 
         assertFalse(presenter.success);
         assertEquals("Username contains invalid characters.",
                 presenter.errorMessage);
-        assertFalse(dao.existsByName("Michelle\tLi"));
+        assertFalse(dao.existsByName("Nai\tWa"));
     }
+
+    @Test
+    void testUsernameTooShortFails() {
+        FakePlayerDAO dao = new FakePlayerDAO();
+        TestPresenter presenter = new TestPresenter();
+        SetUsernameInteractor interactor =
+                new SetUsernameInteractor(dao, presenter);
+
+        interactor.execute(new SetUsernameInputData("AB"));
+
+        assertFalse(presenter.success);
+        assertEquals("Username must be 3-33 characters long (except 67).",
+                presenter.errorMessage);
+        assertFalse(dao.existsByName("AB"));
+    }
+
+    @Test
+    void testUsernameTooLongFails() {
+        FakePlayerDAO dao = new FakePlayerDAO();
+        TestPresenter presenter = new TestPresenter();
+        SetUsernameInteractor interactor =
+                new SetUsernameInteractor(dao, presenter);
+
+        String username = "A".repeat(34);
+        interactor.execute(new SetUsernameInputData(username));
+
+        assertFalse(presenter.success);
+        assertFalse(dao.existsByName(username));
+    }
+
+    @Test
+    void testUsername67IsAllowed() {
+        FakePlayerDAO dao = new FakePlayerDAO();
+        TestPresenter presenter = new TestPresenter();
+        SetUsernameInteractor interactor =
+                new SetUsernameInteractor(dao, presenter);
+
+        interactor.execute(new SetUsernameInputData("67"));
+
+        assertTrue(presenter.success);
+        assertTrue(dao.existsByName("67"));
+    }
+
+    @Test
+    void testUsernameWith67CharactersIsAllowed() {
+        FakePlayerDAO dao = new FakePlayerDAO();
+        TestPresenter presenter = new TestPresenter();
+        SetUsernameInteractor interactor =
+                new SetUsernameInteractor(dao, presenter);
+
+        String username = "A".repeat(67);
+        interactor.execute(new SetUsernameInputData(username));
+
+        assertTrue(presenter.success);
+        assertTrue(dao.existsByName(username));
+    }
+
 }

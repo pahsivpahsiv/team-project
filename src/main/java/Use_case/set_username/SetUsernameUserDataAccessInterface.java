@@ -1,4 +1,4 @@
-package Use_case.SetUsername;
+package use_case.set_username;
 import entity.Player;
 
 public interface SetUsernameUserDataAccessInterface {
@@ -25,4 +25,11 @@ public interface SetUsernameUserDataAccessInterface {
     void setCurrentUsername(String name);
 
     String getCurrentUsername();
+
+    /**
+     * Returns an available ID for a new player.
+     *
+     * @return an available player ID
+     */
+    int getNextPlayerId();
 }

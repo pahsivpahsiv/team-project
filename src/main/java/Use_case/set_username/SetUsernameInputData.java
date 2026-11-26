@@ -1,4 +1,4 @@
-package Use_case.SetUsername;
+package use_case.set_username;
 
 public class SetUsernameInputData {
 

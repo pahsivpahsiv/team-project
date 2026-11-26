@@ -1,4 +1,4 @@
-package Use_case.SetUsername;
+package use_case.set_username;
 import entity.Player;
 
 /**
@@ -63,7 +63,7 @@ public class SetUsernameInteractor implements SetUsernameInputBoundary {
             player = userDataAccessObject.get(username);
         }
         else {
-            player = new Player(username);
+            player = new Player(username, userDataAccessObject.getNextPlayerId());
             userDataAccessObject.save(player);
         }
 

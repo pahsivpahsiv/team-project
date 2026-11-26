@@ -1,4 +1,4 @@
-package Use_case.SetUsername;
+package use_case.set_username;
 
 /**
  * The output boundary for the SetUsername Use Case.
