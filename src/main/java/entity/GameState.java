@@ -7,7 +7,8 @@ public class GameState {
 
     public enum GameStatus {
         PLAYING,
-        PAUSED
+        PAUSED,
+        ENDED
     }
 
     public enum GameMode {
