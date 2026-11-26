@@ -1,7 +1,12 @@
 package network.server;
 
+import interface_adapters.ControllerInterface;
 import network.client.messages.NetworkRequest;
+import network.client.messages.NetworkRequestDecoder;
+import network.client.messages.message_types.MessageType;
+import tools.jackson.databind.ObjectMapper;
 
+import java.util.HashMap;
 import java.util.concurrent.DelayQueue;
 
 /**
@@ -14,20 +19,43 @@ import java.util.concurrent.DelayQueue;
  * Maybe we can toss StartGame use case into the queue when we start a game
  */
 public class GameQueue implements Runnable {
-    private DelayQueue<NetworkRequest> actionQueue;
+    private DelayQueue<NetworkRequest> queue;
+    private final ObjectMapper mapper;
+    private HashMap<MessageType, ControllerInterface> controllerMap;
+    private final NetworkRequestDecoder decoder;
+
+    public GameQueue(HashMap<MessageType, ControllerInterface> controllerMap) {
+        this.controllerMap = controllerMap;
+        this.mapper = new ObjectMapper();
+        this.decoder = new NetworkRequestDecoder();
+        this.queue = new DelayQueue<NetworkRequest>();
+    }
 
     @Override
     public void run() {
         try {
-            NetworkRequest action = actionQueue.take();
+            NetworkRequest action = queue.take();
             process(action);
         } catch (InterruptedException _){
 
         }
     }
-    private void process(NetworkRequest action){
-        switch (action.type()){
 
-        }
+    /**
+     * Gets the appropriate controller from map, then passes the stored input data into its execute().
+     * @param request NetworkRequest object from queue.
+     */
+    private void process(NetworkRequest request){
+        controllerMap.get(request.type()).execute(decoder.decode(request));
+    }
+
+    /**
+     * Adds a NetworkRequest to queue.
+     * TODO: Add delay to requests.
+     * @param message JSON representation of the NetworkRequest object.
+     */
+    public void incomingMessage(String message) {
+        var request = mapper.readValue(message, NetworkRequest.class);
+        queue.offer(request);
     }
 }

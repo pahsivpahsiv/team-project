@@ -1,5 +1,6 @@
 package network.client.messages;
 
+import network.client.messages.message_types.MessageType;
 import tools.jackson.databind.JsonNode;
 
 import java.util.concurrent.Delayed;
@@ -28,19 +29,15 @@ public record NetworkRequest(
     // TODO: Needs implementation
     @Override
     public long getDelay(TimeUnit unit) {
-
         // return unit.convert(remaining, TimeUnit.NANOSECONDS);
         return 0;
     }
 
-    /*
-        Placeholder message types
-         */
-    public enum MessageType{
-        SET_FOUND,
-        NO_SETS,
-        EXIT_GAME,
-        CONNECTION_FOUND,
-        START_GAME
+    /**
+     * Returns the correct class type to convert its JSON node into.
+     * @return Corresponding message type.
+     */
+    public Class<? extends ClientMessage> getMessageType(){
+        return type.getType();
     }
 }

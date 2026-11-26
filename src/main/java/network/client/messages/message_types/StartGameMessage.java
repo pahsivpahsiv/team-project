@@ -1,6 +1,6 @@
-package network.client.messages;
+package network.client.messages.message_types;
 
-import java.util.List;
+import network.client.messages.ClientMessage;
 
 public record StartGameMessage(
         int gameMode,

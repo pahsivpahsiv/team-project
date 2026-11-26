@@ -1,4 +1,6 @@
-package network.client.messages;
+package network.client.messages.message_types;
+
+import network.client.messages.ClientMessage;
 
 import java.util.List;
 
