@@ -8,7 +8,7 @@ public interface NoSetsOutputBoundary {
      * Passes the output of the use case to the presenter.
      * @param outputData the output to pass on.
      */
-    void prepareSuccessView(NoSetsOutputData outputData);
+    void prepareSuccessView(SetsOutputData outputData);
 
     /**
      * Passes the fail message of the use case to the presenter.

@@ -8,15 +8,16 @@ class PlayerTest {
 
     @Test
     void testConstructor() {
-        Player player = new Player("Romina");
+        Player player = new Player("Romina", 1);
 
         assertEquals("Romina", player.getUsername());
         assertEquals(0, player.getScore());
         assertEquals(-1, player.getBestTime());
+        assertEquals(1, player.getId());
     }
     @Test
     void testSetUsername() {
-        Player player = new Player("Romina");
+        Player player = new Player("Romina", 1);
 
         player.setUsername("Alex");
 
@@ -25,7 +26,7 @@ class PlayerTest {
 
     @Test
     void testIncrementScore() {
-        Player player = new Player("Romina");
+        Player player = new Player("Romina", 1);
 
         player.incrementScore();
         player.incrementScore();
@@ -35,7 +36,7 @@ class PlayerTest {
 
     @Test
     void testResetScore() {
-        Player player = new Player("Romina");
+        Player player = new Player("Romina", 1);
 
         player.incrementScore();
         player.resetScore();
@@ -45,7 +46,7 @@ class PlayerTest {
 
     @Test
     void testUpdateBestTime() {
-        Player player = new Player("Romina");
+        Player player = new Player("Romina", 1);
 
         player.updateBestTime(60000);
         assertEquals(60000, player.getBestTime());
@@ -60,12 +61,12 @@ class PlayerTest {
     @Test
     void testInvalidUsername() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Player(""));
+                () -> new Player("", 1));
     }
 
     @Test
     void testInvalidBestTime() {
-        Player player = new Player("Romina");
+        Player player = new Player("Romina", 1);
 
         assertThrows(IllegalArgumentException.class,
                 () -> player.updateBestTime(-100));

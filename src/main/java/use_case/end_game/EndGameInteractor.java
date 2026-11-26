@@ -11,28 +11,26 @@ public class EndGameInteractor implements EndGameInputBoundary {
 
     private final EndGameOutputBoundary endGamePresenter;
     private final GameState gameState;
-    private final Player player;
 
     public EndGameInteractor(
             EndGameOutputBoundary endGamePresenter,
-            GameState gameState,
-            Player player) {
+            GameState gameState) {
         this.endGamePresenter = endGamePresenter;
         this.gameState = gameState;
-        this.player = player;
     }
 
     @Override
-    public void endGame() {
+    public void endGame(int id) {
         if (gameState.getStatus() == GameState.GameStatus.ENDED) {
             endGamePresenter.prepareFailView("The game has already ended.");
             return;
         }
 
         gameState.setStatus(GameState.GameStatus.ENDED);
+        Player player = gameState.getPlayer(id);
 
         EndGameOutputData outputData = new EndGameOutputData(
-                player.getUsername(),
+                player.getId(),
                 player.getScore(),
                 gameState.getTime());
 

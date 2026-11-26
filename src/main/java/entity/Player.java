@@ -10,8 +10,9 @@ public class Player {
     private String username;
     private int score;
     private long bestTime;
+    private int id;
 
-    public Player(String username) {
+    public Player(String username, int id) {
         if (username == null || username.isBlank()) {
             throw new IllegalArgumentException(
                     "Username cannot be empty.");
@@ -20,6 +21,7 @@ public class Player {
         this.username = username;
         this.score = 0;
         this.bestTime = -1;
+        this.id = id;
     }
 
     public String getUsername() {
@@ -59,6 +61,14 @@ public class Player {
         if (bestTime == -1 || newTime < bestTime) {
             bestTime = newTime;
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
 
