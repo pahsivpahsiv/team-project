@@ -1,6 +1,8 @@
 
 package entity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class GameState {
@@ -21,12 +23,22 @@ public class GameState {
     private CardStuff cardStuff;
     private GameStatus status;
     private GameMode mode;
+    private HashMap<Integer, Player> players;
 
-    public GameState(CardStuff cardStuff, GameMode mode) {
+    public GameState(CardStuff cardStuff, GameMode mode, Player[] players) {
         this.time = 0;
         this.cardStuff = Objects.requireNonNull(cardStuff);
         this.status = GameStatus.PLAYING;
         this.mode = Objects.requireNonNull(mode);
+        HashMap<Integer, Player> hashPlayers = new HashMap<>();
+        for (Player player : players) {
+            if (hashPlayers.containsKey(player.getId())) {
+                throw new IllegalArgumentException(
+                        "Two players cannot have the same id");
+            }
+            hashPlayers.put(player.getId(), player);
+        }
+        this.players = hashPlayers;
     }
 
     public long getTime() {
@@ -63,5 +75,9 @@ public class GameState {
 
     public void setMode(GameMode mode) {
         this.mode = Objects.requireNonNull(mode);
+    }
+
+    public Player getPlayer(int id) {
+        return this.players.get(id);
     }
 }

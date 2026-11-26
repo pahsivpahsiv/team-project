@@ -36,23 +36,23 @@ public class EndGameInteractorTest {
 
     @BeforeEach
     void setUp() {
-        gameState = new GameState(new CardStuff(), GameState.GameMode.SET);
+        player = new Player("alice", 1);
+        gameState = new GameState(new CardStuff(), GameState.GameMode.SET, new Player[] {player});
         gameState.setTime(120);
-        player = new Player("alice");
         player.incrementScore();
         player.incrementScore();
         presenter = new RecordingPresenter();
-        interactor = new EndGameInteractor(presenter, gameState, player);
+        interactor = new EndGameInteractor(presenter, gameState);
     }
 
     @Test
     void endingAGameInProgressShowsResults() {
-        interactor.endGame();
+        interactor.endGame(1);
 
         assertEquals(GameState.GameStatus.ENDED, gameState.getStatus());
         assertNull(presenter.failMessage);
         assertNotNull(presenter.successData);
-        assertEquals("alice", presenter.successData.getUsername());
+        assertEquals(1, presenter.successData.getId());
         assertEquals(2, presenter.successData.getScore());
         assertEquals(120, presenter.successData.getTimePlayed());
     }
@@ -61,7 +61,7 @@ public class EndGameInteractorTest {
     void aPausedGameCanBeEnded() {
         gameState.setStatus(GameState.GameStatus.PAUSED);
 
-        interactor.endGame();
+        interactor.endGame(1);
 
         assertEquals(GameState.GameStatus.ENDED, gameState.getStatus());
         assertNotNull(presenter.successData);
@@ -71,7 +71,7 @@ public class EndGameInteractorTest {
     void endingAnAlreadyEndedGameFails() {
         gameState.setStatus(GameState.GameStatus.ENDED);
 
-        interactor.endGame();
+        interactor.endGame(1);
 
         assertNull(presenter.successData);
         assertNotNull(presenter.failMessage);
@@ -80,7 +80,7 @@ public class EndGameInteractorTest {
     @Test
     void endingEarlyDoesNotSetABestTime() {
         // I've assumed that a game ended early is not recorded as a best time.
-        interactor.endGame();
+        interactor.endGame(1);
 
         assertEquals(-1, player.getBestTime());
     }

@@ -9,6 +9,7 @@ public class EndGameState {
     private int score;
     private long timePlayed;
     private String errorMessage;
+    private int id;
 
     public String getUsername() {
         return username;
@@ -40,5 +41,13 @@ public class EndGameState {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
