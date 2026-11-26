@@ -4,6 +4,7 @@ import interface_adapters.ControllerInterface;
 import network.client.messages.NetworkRequest;
 import network.client.messages.NetworkRequestDecoder;
 import network.client.messages.message_types.MessageType;
+import network.shared.MessageDestination;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import java.util.concurrent.DelayQueue;
  *
  * Maybe we can toss StartGame use case into the queue when we start a game
  */
-public class GameQueue implements Runnable {
+public class GameQueue implements Runnable, MessageDestination {
     private DelayQueue<NetworkRequest> queue;
     private final ObjectMapper mapper;
     private HashMap<MessageType, ControllerInterface> controllerMap;
@@ -34,8 +35,10 @@ public class GameQueue implements Runnable {
     @Override
     public void run() {
         try {
-            NetworkRequest action = queue.take();
-            process(action);
+            while (true) {
+                NetworkRequest action = queue.take();
+                process(action);
+            }
         } catch (InterruptedException _){
 
         }
