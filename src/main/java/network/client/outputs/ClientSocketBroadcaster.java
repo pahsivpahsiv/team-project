@@ -8,7 +8,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-
+/**
+ * TODO: Check this works as intended. May need to update.
+ * Also, I think I want to mimic the structure of SocketReceiver.
+ * Where both the Server and Client extend the same mostly feature-complete class.
+ */
 public class ClientSocketBroadcaster implements ClientOutput{
 
     private final Socket socket; // may not need to store

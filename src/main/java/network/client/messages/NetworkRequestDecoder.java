@@ -11,7 +11,6 @@ public class NetworkRequestDecoder {
     public NetworkRequestDecoder(){
         this.mapper = new ObjectMapper();
     }
-
     /**
      * Returns the object representation of NetworkRequest's data payload.
      * @param request A request from the client.

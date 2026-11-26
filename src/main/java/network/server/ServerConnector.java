@@ -12,6 +12,7 @@ import java.util.List;
  * ServerSocket.accept() waits on a port until someone connects.
  * I'm not too sure how it works.
  * TODO: Implement this class.
+ * Currently has a temporary scaffold for taking input, but not outputs.
  */
 public class ServerConnector implements Runnable {
     private final ServerSocket listener;

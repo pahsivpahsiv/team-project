@@ -6,16 +6,24 @@ import tools.jackson.databind.JsonNode;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * The main data structure being passed between the server and the client.
+ * Gets converted to a JSON and back.
+ * TODO: Check whether variable name length affects JSON efficiency.
+ * @param playerId
+ * @param timestamp
+ * @param type Type of message (used to reconstruct data into a ClientMessage object).
+ * @param data The JsonNode representation of a ClientMessage object.
+ */
 public record NetworkRequest(
         int playerId,
         long timestamp,
         MessageType type,
         JsonNode data
 ) implements Delayed {
-
-    // TODO: Check if this is correct
     /**
      * From the Delayed interface.
+     * TODO: Check if this is correct
      * @param o the object to be compared.
      * @return
      */

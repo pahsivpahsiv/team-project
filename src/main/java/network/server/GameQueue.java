@@ -16,8 +16,11 @@ import java.util.concurrent.DelayQueue;
  * We can just set expiry time to e.g. 200 ms after client timestamp
  * Should think about what we want to actually put in the queue.
  * Is NetworkRequest really the best option, or do we want to rewrap it?
- *
  * Maybe we can toss StartGame use case into the queue when we start a game
+ * <p></p>
+ * UPDATE: Now that we have a decoder, I think using NetworkRequest is sufficient.
+ * Haven't figured out the delay yet.
+ *
  */
 public class GameQueue implements Runnable, MessageDestination {
     private DelayQueue<NetworkRequest> queue;
@@ -32,6 +35,9 @@ public class GameQueue implements Runnable, MessageDestination {
         this.queue = new DelayQueue<NetworkRequest>();
     }
 
+    /**
+     * TODO: Handle exceptions and closing.
+     */
     @Override
     public void run() {
         try {

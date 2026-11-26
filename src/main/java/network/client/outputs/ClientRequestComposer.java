@@ -3,6 +3,9 @@ package network.client.outputs;
 import interface_adapters.clientout.NetworkInputBoundary;
 import network.client.messages.NetworkRequest;
 
+/**
+ * TODO: Check this works as intended. May need to update.
+ */
 public class ClientRequestComposer implements NetworkInputBoundary {
 
     private final ClientOutput broadcaster;
@@ -10,7 +13,7 @@ public class ClientRequestComposer implements NetworkInputBoundary {
         this.broadcaster = broadcaster;
     }
     @Override
-    public void sendOutput(NetworkRequest outputData){
-        broadcaster.send(outputData);
+    public void sendMessage(NetworkRequest message){
+        broadcaster.send(message);
     }
 }

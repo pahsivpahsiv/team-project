@@ -10,5 +10,4 @@ public interface ClientOutput {
      * @return true if the message was sent successfully, false otherwise
      */
     boolean send(NetworkRequest message);
-
 }
