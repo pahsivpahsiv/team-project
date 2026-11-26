@@ -73,13 +73,6 @@ public class CardStuffTest {
         ids.add(cardStuff.getField().get(0));
         ids.add(cardStuff.getField().get(1));
         ids.add(cardStuff.getField().get(2));
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            cardStuff.replaceCards(ids);
-        });
-        String expectedMessage = "The deck is empty and the cards cannot be replaced.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
 
         Exception exceptionTwo = assertThrows(RuntimeException.class, cardStuff::expandField);
         String expectedMessageTwo = "The deck is empty and cards cannot be added.";

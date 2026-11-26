@@ -39,7 +39,7 @@ public class NoSetsInteractor implements NoSetsInputBoundary {
                     ids.add(k);
                     boolean result = setChecker.checkSet(ids);
 
-                    if (!result) {
+                    if (result) {
                         noSetsPresenter.prepareFailView("There is a set on the field.");
                         flag = false;
                         break outerloop;
