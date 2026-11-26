@@ -90,16 +90,16 @@ public class CardStuff {
 
         if (deck.isEmpty()) {
             for (int id : ids) {
-                field.remove(id);
+                field.remove((Integer) id);
             }
         } else if (field.size() > 12) {
             while (field.size() > 12) {
-                field.remove(ids.get(0));
-                ids.remove(ids.get(0));
+                field.remove((Integer) ids.get(0));
+                ids.remove((Integer) ids.get(0));
             }
             if (!ids.isEmpty()) {
                 for (int id : ids) {
-                    field.remove(id);
+                    field.remove((Integer) id);
                     if (!deck.isEmpty()) {
                         field.add(deck.remove(0));
                     }
@@ -107,14 +107,14 @@ public class CardStuff {
             }
         } else if (ids.size() > deck.size()) {
             for (int id : ids) {
-                field.remove(id);
+                field.remove((Integer) id);
                 if (!deck.isEmpty()) {
                     field.add(deck.remove(0));
                 }
             }
         } else {
             for (int id : ids) {
-                field.remove(id);
+                field.remove((Integer) id);
                 field.add(deck.remove(0));
             }
         }
