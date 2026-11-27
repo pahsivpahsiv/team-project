@@ -17,7 +17,7 @@ public class EndGamePresenter implements EndGameOutputBoundary {
     @Override
     public void prepareSuccessView(EndGameOutputData outputData) {
         EndGameState state = endGameViewModel.getState();
-        state.setUsername(outputData.getUsername());
+        state.setId(outputData.getId());
         state.setScore(outputData.getScore());
         state.setTimePlayed(outputData.getTimePlayed());
         state.setErrorMessage(null);
