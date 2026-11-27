@@ -4,6 +4,7 @@ import interface_adapters.ControllerInterface;
 import network.client.messages.NetworkRequest;
 import network.client.messages.NetworkRequestDecoder;
 import network.client.messages.message_types.MessageType;
+import network.shared.GameProcessor;
 import network.shared.MessageDestination;
 import tools.jackson.databind.ObjectMapper;
 
@@ -22,7 +23,7 @@ import java.util.concurrent.DelayQueue;
  * Haven't figured out the delay yet.
  *
  */
-public class GameQueue implements Runnable, MessageDestination {
+public class GameQueue implements GameProcessor, MessageDestination {
     private DelayQueue<NetworkRequest> queue;
     private final ObjectMapper mapper;
     private HashMap<MessageType, ControllerInterface> controllerMap;
@@ -65,6 +66,6 @@ public class GameQueue implements Runnable, MessageDestination {
      */
     public void incomingMessage(String message) {
         var request = mapper.readValue(message, NetworkRequest.class);
-        queue.offer(request);
+
     }
 }
