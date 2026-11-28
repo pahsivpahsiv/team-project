@@ -43,11 +43,13 @@ public class GameQueue implements GameProcessor, MessageDestination {
     public void run() {
         try {
             while (true) {
+                System.out.println("(GameQueue) Waiting to take new request!");
                 NetworkRequest action = queue.take();
+                System.out.println("(GameQueue) Take successful: " + action.toString());
                 process(action);
             }
         } catch (InterruptedException _){
-
+            System.out.println("(GameQueue) Run Interrupted");
         }
     }
 
@@ -56,7 +58,9 @@ public class GameQueue implements GameProcessor, MessageDestination {
      * @param request NetworkRequest object from queue.
      */
     private void process(NetworkRequest request){
+        System.out.println("(GameQueue) Processing request!");
         controllerMap.get(request.type()).execute(decoder.decode(request));
+        System.out.println("(GameQueue) Request complete!");
     }
 
     /**
@@ -65,7 +69,8 @@ public class GameQueue implements GameProcessor, MessageDestination {
      * @param message JSON representation of the NetworkRequest object.
      */
     public void incomingMessage(String message) {
-        var request = mapper.readValue(message, NetworkRequest.class);
-
+        NetworkRequest request = mapper.readValue(message, NetworkRequest.class);
+        System.out.println("(GameQueue) Parsing new request!");
+        queue.offer(request);
     }
 }

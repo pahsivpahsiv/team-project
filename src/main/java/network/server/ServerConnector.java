@@ -22,7 +22,8 @@ public class ServerConnector implements Runnable {
         this.queue = queue;
         this.connections = new ArrayList<Thread>();
         try {
-            this.listener = new ServerSocket();
+            this.listener = new ServerSocket(5000);
+            System.out.println("(ServerConnector) Port opened!");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -30,12 +31,15 @@ public class ServerConnector implements Runnable {
     public void run(){
         while (true){
             try {
+                System.out.println("(ServerConnector) Waiting for connection!");
                 Socket socket = listener.accept(); // blocking operation
                 /* ServerSocketReceiver is a runnable that listens for client inputs.
                  * Consider using an ExecutorService rather than manually creating threads.
                  */
                 Thread t = new Thread(new ServerSocketReceiver(socket,queue));
+                t.start();
                 connections.add(t);
+                System.out.println("(ServerConnector) Connection Successful: " + socket.toString());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

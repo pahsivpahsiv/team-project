@@ -1,6 +1,7 @@
 package network.client.messages.message_types;
 
 import network.client.messages.ClientMessage;
+import network.server.Test.TestMessage;
 
 /**
  * Stores information on all types of NetworkRequests and the ClientMessages they contain.
@@ -11,7 +12,8 @@ public enum MessageType{
     NO_SETS(NoSetsMessage.class),
     //EXIT_GAME,
     //CONNECTION_FOUND,
-    START_GAME(StartGameMessage.class);
+    START_GAME(StartGameMessage.class),
+    TEST_MESSAGE(TestMessage.class);
 
     private final Class<? extends ClientMessage> type;
 

@@ -28,7 +28,7 @@ public class ClientSocketBroadcaster implements ClientOutput{
 
     @Override
     public boolean send(NetworkRequest message){
-        out.println(message);
+        out.println(mapper.writeValueAsString(message));
         return !out.checkError();
     }
 }

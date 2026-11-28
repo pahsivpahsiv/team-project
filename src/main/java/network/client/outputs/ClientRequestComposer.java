@@ -15,7 +15,7 @@ public class ClientRequestComposer implements NetworkInputBoundary {
     private final ClientOutput broadcaster;
     private final int playerId;
     private final ObjectMapper mapper;
-    public ClientRequestComposer(ClientSocketBroadcaster broadcaster, int playerId) {
+    public ClientRequestComposer(ClientOutput broadcaster, int playerId) {
         this.broadcaster = broadcaster;
         this.playerId = playerId;
         this.mapper = new ObjectMapper();
